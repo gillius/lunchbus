@@ -1,4 +1,4 @@
-angular.module('webapp').factory('mp', function($q, $rootScope) {
+angular.module('webapp').factory('mp', function($q, $rootScope, $timeout) {
 	var socket = new WebSocket("ws://localhost:8080/stomp");
 
 	var stompClient = Stomp.over(socket);
@@ -17,7 +17,7 @@ angular.module('webapp').factory('mp', function($q, $rootScope) {
 		subscribe: function(queue, callback) {
 			connected.then(function() {
 				stompClient.subscribe(queue, function(frame) {
-					$rootScope.$apply(function() {
+					$timeout(function() {
 						if (typeof frame.body === 'string' && frame.body && (frame.body.charAt(0) === '{' || frame.body.charAt(0) === '['))
 							frame.body = JSON.parse(frame.body);
 						callback(frame);
