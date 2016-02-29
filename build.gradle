@@ -1,0 +1,39 @@
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.2.RELEASE")
+	}
+}
+
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+	baseName = 'lunchbus'
+	version =  '0.1.0'
+}
+
+repositories {
+	jcenter()
+}
+
+configurations {
+	compile.exclude module: "spring-boot-starter-tomcat"
+}
+
+dependencies {
+	compile("org.codehaus.groovy:groovy-all:2.4.5")
+	compile("org.springframework.boot:spring-boot-starter-web")
+	compile("org.springframework.boot:spring-boot-starter-websocket")
+	compile("org.springframework:spring-messaging")
+	compile("org.springframework.boot:spring-boot-starter-undertow")
+	compile("org.springframework.boot:spring-boot-starter-actuator")
+	compile("org.springframework.boot:spring-boot-devtools")
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.11'
+}

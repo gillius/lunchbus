@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+<head>
+	<title>Lunchbus</title>
+</head>
+<body>
+<h3>IOU</h3>
+<div ng-controller="IouCtrl as iou">
+	<ul>
+		<li ng-repeat="entry in iou.entries">
+			{{entry.debtor}} owes {{entry.creditor}}: {{entry.amount}}
+			<button ng-click="iou.more(entry)">more</button>
+			<button ng-click="iou.less(entry)">less</button>
+		</li>
+	</ul>
+	<p>Add an entry:</p>
+	<form ng-submit="iou.addEntry()">
+		Creditor: <input type="text" ng-model="iou.creditor">
+		Debtor: <input type="text" ng-model="iou.debtor">
+		<button type="submit">Add</button>
+	</form>
+</div>
+
+<div ng-controller="MessagesCtrl as ctrl">
+	<h3>Messages:</h3>
+	<ol id="messages">
+		<li ng-repeat="m in ctrl.messages track by $index">{{m}}</li>
+	</ol>
+</div>
+
+<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/1.11.2/jquery.min.js"></script>-->
+<!--<script type="text/javascript" src="//cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="MessagesCtrl.js"></script>
+<script type="text/javascript" src="iouCtrl.js"></script>
+<script type="text/javascript" src="mp.js"></script>
+
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+</body>
+</html>
