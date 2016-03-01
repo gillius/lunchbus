@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class People {
 	private TreeSet<Person> people = new TreeSet<>([
-	    new Person(name: "Jason")
+	    new Person(name: "Jason", tags: ["cool"])
 	])
 
 	@Autowired
@@ -21,9 +21,22 @@ class People {
 		mt.convertAndSend("/topic/people", people)
 	}
 
+	void addTag(String name, String tag) {
+		def person = people.find { it.name == name }
+		if (person) {
+			person.tags << tag
+		}
+		mt.convertAndSend("/topic/people", people)
+	}
+
 	@MessageMapping("/people/add")
 	void addPersonByMessage(Map<String, Object> message) {
 		addPerson(message.name as String)
+	}
+
+	@MessageMapping("/people/addTag")
+	void addPersonTagByMessage(Map<String, Object> message) {
+		addTag(message.name as String, message.tag as String)
 	}
 
 	@RequestMapping("/people/current")

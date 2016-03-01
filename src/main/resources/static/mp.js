@@ -2,7 +2,7 @@ angular.module('webapp').factory('mp', function($q, $rootScope, $timeout, host) 
 	var socket = new WebSocket("ws://" + host + ":8080/stomp");
 
 	var stompClient = Stomp.over(socket);
-	stompClient.debug = angular.noop();
+	//stompClient.debug = angular.noop();
 
 	var connectedDeferred = $q.defer();
 	var connected = connectedDeferred.promise;

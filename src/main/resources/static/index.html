@@ -14,22 +14,38 @@
 		</li>
 	</ul>
 	<p>Add an entry:</p>
-	<form ng-submit="iou.addEntry()">
-		<label>Creditor: <input type="text" ng-model="iou.creditor"></label>
-		<label>Debtor: <input type="text" ng-model="iou.debtor"></label>
-		<button type="submit">Add</button>
+	<form name="iouForm" ng-submit="iou.addEntry()">
+		<label>Creditor: <input type="text" ng-model="iou.creditor" ng-required="true"></label>
+		<label>Debtor: <input type="text" ng-model="iou.debtor" ng-required="true"></label>
+		<button type="submit" ng-disabled="!iouForm.$valid">Add</button>
 	</form>
 </div>
 
 <h3>People</h3>
 <div ng-controller="PeopleCtrl as people">
 	<ul>
-		<li ng-repeat="p in people.people">{{p.name}}</li>
+		<li ng-repeat="p in people.people">
+			{{p.name}}:
+			<tags route="'/app/people/addTag'" parent-name="p.name" tags="p.tags"></tags>
+		</li>
 	</ul>
-	<p>Add person:</p>
-	<form ng-submit="people.addPerson()">
-		<label>Name: <input type="text" ng-model="people.name"></label>
-		<button type="submit">Add</button>
+	<form name="addPerson" ng-submit="people.addPerson()">
+		<label>Add person: <input type="text" ng-model="people.name" ng-required="true"></label>
+		<button type="submit" ng-disabled="!addPerson.$valid">Add</button>
+	</form>
+</div>
+
+<h3>Places</h3>
+<div ng-controller="PlacesCtrl as places">
+	<ul>
+		<li ng-repeat="p in places.places">
+			{{p.name}}:
+			<tags route="'/app/places/addTag'" parent-name="p.name" tags="p.tags"></tags>
+		</li>
+	</ul>
+	<form name="addPlace" ng-submit="places.addPlace()">
+		<label>Add place: <input type="text" ng-model="places.name" ng-required="true"></label>
+		<button type="submit" ng-disabled="!addPlace.$valid">Add</button>
 	</form>
 </div>
 
@@ -50,6 +66,8 @@
 <script type="text/javascript" src="iouCtrl.js"></script>
 <script type="text/javascript" src="mp.js"></script>
 <script type="text/javascript" src="PeopleCtrl.js"></script>
+<script type="text/javascript" src="PlacesCtrl.js"></script>
+<script type="text/javascript" src="TagsComponent.js"></script>
 
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </body>

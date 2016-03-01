@@ -24,7 +24,7 @@ angular.module('webapp').controller('IouCtrl', function(mp) {
 		increment(entry, -1);
 	};
 
-	this.addPerson = function() {
+	this.addEntry = function() {
 		mp.send('/app/iou/increment', {creditor: ctrl.creditor, debtor: ctrl.debtor, amount: 0});
 	}
 });
