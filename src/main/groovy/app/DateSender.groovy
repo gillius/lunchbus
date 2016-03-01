@@ -5,14 +5,17 @@ import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 
+/**
+ * TimeKeeper serves as an example that the server can originate changes to the model of the application.
+ */
 @Service
-class Messenger {
+class DateSender {
 	@Autowired
 	SimpMessagingTemplate template
 
-	@Scheduled(fixedRate = 5000L)
+	@Scheduled(fixedRate = 1000L)
 	public void trigger() {
-		// sends the message to /topic/message
-		template.convertAndSend("/topic/message", "Date: " + new Date());
+		// sends the message to /topic/date
+		template.convertAndSend("/topic/date", "Date: " + new Date());
 	}
 }

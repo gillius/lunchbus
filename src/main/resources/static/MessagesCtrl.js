@@ -5,6 +5,7 @@ angular.module('webapp').controller('MessagesCtrl', function($scope, mp) {
 	stompClient.debug = angular.noop();
 	
 	this.messages = [];
+	this.date = null;
 
 	var ctrl = this;
 	
@@ -16,9 +17,8 @@ angular.module('webapp').controller('MessagesCtrl', function($scope, mp) {
 		append("Connected");
 	});
 
-	mp.subscribe("/topic/message", function(data) {
-		var message = data.body;
-		append(message);
+	mp.subscribe("/topic/date", function(data) {
+		ctrl.date = data.body;
 	});
 
 	mp.subscribe("/topic/hello", function(data) {

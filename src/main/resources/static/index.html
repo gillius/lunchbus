@@ -54,6 +54,7 @@
 	<ol id="messages">
 		<li ng-repeat="m in ctrl.messages track by $index">{{m}}</li>
 	</ol>
+	<p ng-show="ctrl.date">The server's date is: {{ctrl.date}}</p>
 </div>
 
 <!--<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/1.11.2/jquery.min.js"></script>-->
