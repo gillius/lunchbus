@@ -9,14 +9,13 @@
 	<ul>
 		<li ng-repeat="entry in iou.entries">
 			{{entry.debtor}} owes {{entry.creditor}}: {{entry.amount}}
-			<button ng-click="iou.more(entry)">more</button>
-			<button ng-click="iou.less(entry)">less</button>
+			<button ng-click="iou.more(entry)">+</button>
+			<button ng-click="iou.less(entry)">-</button>
 		</li>
 	</ul>
-	<p>Add an entry:</p>
 	<form name="iouForm" ng-submit="iou.addEntry()">
-		<label>Creditor: <input type="text" ng-model="iou.creditor" ng-required="true"></label>
-		<label>Debtor: <input type="text" ng-model="iou.debtor" ng-required="true"></label>
+		<input type="text" ng-model="iou.debtor" ng-required="true">
+		<label>owes: <input type="text" ng-model="iou.creditor" ng-required="true"></label>
 		<button type="submit" ng-disabled="!iouForm.$valid">Add</button>
 	</form>
 </div>
