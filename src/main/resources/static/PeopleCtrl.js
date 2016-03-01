@@ -14,5 +14,6 @@ angular.module('webapp').controller('PeopleCtrl', function(mp) {
 
 	this.addPerson = function() {
 		mp.send('/app/people/add', {name: ctrl.name});
+		ctrl.name = '';
 	};
 });

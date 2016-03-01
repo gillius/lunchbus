@@ -14,5 +14,6 @@ angular.module('webapp').controller('PlacesCtrl', function(mp) {
 
 	this.addPlace = function() {
 		mp.send('/app/places/add', {name: ctrl.name});
+		ctrl.name = '';
 	};
 });
