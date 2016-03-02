@@ -16,4 +16,8 @@ angular.module('webapp').controller('PlacesCtrl', function(mp) {
 		mp.send('/app/places/add', {name: ctrl.name});
 		ctrl.name = '';
 	};
+
+	this.updateActive = function(item) {
+		mp.send('/app/places/setActive', {name: item.name, active: item.active});
+	}
 });

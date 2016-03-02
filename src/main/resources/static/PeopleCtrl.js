@@ -16,4 +16,8 @@ angular.module('webapp').controller('PeopleCtrl', function(mp) {
 		mp.send('/app/people/add', {name: ctrl.name});
 		ctrl.name = '';
 	};
+
+	this.updateActive = function(item) {
+		mp.send('/app/people/setActive', {name: item.name, active: item.active});
+	}
 });

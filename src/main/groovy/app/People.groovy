@@ -1,5 +1,7 @@
 package app
 
+import groovy.transform.stc.ClosureParams
+import groovy.transform.stc.SimpleType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.simp.SimpMessagingTemplate
@@ -22,9 +24,21 @@ class People {
 	}
 
 	void addTag(String name, String tag) {
+		update(name) {
+			it.tags << tag
+		}
+	}
+
+	void setActive(String name, boolean active) {
+		update(name) {
+			it.active = active
+		}
+	}
+
+	private void update(String name, @ClosureParams(value = SimpleType, options = "app.Person") Closure<?> updater) {
 		def person = people.find { it.name == name }
 		if (person) {
-			person.tags << tag
+			updater(person)
 		}
 		mt.convertAndSend("/topic/people", people)
 	}
@@ -37,6 +51,11 @@ class People {
 	@MessageMapping("/people/addTag")
 	void addPersonTagByMessage(Map<String, Object> message) {
 		addTag(message.name as String, message.tag as String)
+	}
+
+	@MessageMapping("/people/setActive")
+	void setPersonActiveByMessage(Map<String, Object> message) {
+		setActive(message.name as String, message.active as boolean)
 	}
 
 	@RequestMapping("/people/current")
