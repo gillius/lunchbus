@@ -66,12 +66,12 @@
 	</form>
 </div>
 
-<div ng-controller="MessagesCtrl as ctrl">
-	<h3>Messages:</h3>
-	<ol id="messages">
-		<li ng-repeat="m in ctrl.messages track by $index">{{m}}</li>
-	</ol>
-	<p ng-show="ctrl.date">The server's date is: {{ctrl.date}}</p>
+<div ng-controller="StatusCtrl as ctrl">
+	<p>
+		Status:
+		{{ctrl.connected ? 'connected, ' : 'disconnected, '}}
+		<span ng-show="ctrl.date">server's time is: {{ctrl.date}}</span>
+	</p>
 </div>
 
 <!--<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/1.11.2/jquery.min.js"></script>-->
@@ -81,7 +81,7 @@
 
 <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="ChatCtrl.js"></script>
-<script type="text/javascript" src="MessagesCtrl.js"></script>
+<script type="text/javascript" src="StatusCtrl.js"></script>
 <script type="text/javascript" src="iouCtrl.js"></script>
 <script type="text/javascript" src="mp.js"></script>
 <script type="text/javascript" src="PeopleCtrl.js"></script>
