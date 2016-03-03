@@ -9,6 +9,7 @@ websockets look like and its strengths/weaknesses.
 - [x] IOU list (done)
 - [x] Places list, with tags
 - [x] People going
+- [x] Chatbox
 - [ ] Choose a place randomly, restricting by preferences (tags) of those going
 
 ## Running

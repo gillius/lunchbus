@@ -50,6 +50,22 @@
 	</form>
 </div>
 
+<h3>Chat</h3>
+<div ng-controller="ChatCtrl as chat">
+	<table>
+		<tr ng-repeat="m in chat.messages">
+			<td>{{m.date | date:'shortTime'}}</td>
+			<td>{{m.name}}</td>
+			<td>{{m.message}}</td>
+		</tr>
+	</table>
+	<form name="addMessage" ng-submit="chat.addMessage()">
+		<label>Name: <input type="text" ng-model="chat.name" ng-required="true"></label>
+		<label>Message: <input type="text" ng-model="chat.message" ng-required="true"></label>
+		<button type="submit" ng-disabled="!addMessage.$valid">Speak!</button>
+	</form>
+</div>
+
 <div ng-controller="MessagesCtrl as ctrl">
 	<h3>Messages:</h3>
 	<ol id="messages">
@@ -64,6 +80,7 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 
 <script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="ChatCtrl.js"></script>
 <script type="text/javascript" src="MessagesCtrl.js"></script>
 <script type="text/javascript" src="iouCtrl.js"></script>
 <script type="text/javascript" src="mp.js"></script>
