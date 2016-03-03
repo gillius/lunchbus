@@ -22,6 +22,8 @@ Another method:
     gradlew build
     java -jar build\libs\lunchbus-0.1.0.jar
 
+You can also add `--server.port=9000` to change the port used to whatever you want.
+
 ## License
 
 Copyright by Jason Winnebeck, 2016. Licensed under Apache 2.0 License.
