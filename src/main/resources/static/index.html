@@ -60,7 +60,7 @@
 		</tr>
 	</table>
 	<form name="addMessage" ng-submit="chat.addMessage()">
-		<label>Name: <input type="text" ng-model="chat.name" ng-required="true"></label>
+		<label>Name: <input type="text" ng-model="chat.name" ng-change="chat.nameUpdated()" ng-required="true"></label>
 		<label>Message: <input type="text" ng-model="chat.message" ng-required="true"></label>
 		<button type="submit" ng-disabled="!addMessage.$valid">Speak!</button>
 	</form>

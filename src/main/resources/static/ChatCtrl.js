@@ -2,7 +2,7 @@ angular.module('webapp').controller('ChatCtrl', function(mp) {
 	var ctrl = this;
 
 	ctrl.messages = [];
-	ctrl.name = "";
+	ctrl.name = window.localStorage.getItem("lunchbus.name") || "";
 	ctrl.message = "";
 
 	var updateChat = function(data) {
@@ -17,5 +17,9 @@ angular.module('webapp').controller('ChatCtrl', function(mp) {
 	ctrl.addMessage = function() {
 		mp.send('/app/chat/add', {name: ctrl.name, message: ctrl.message});
 		ctrl.message = "";
-	}
+	};
+
+	ctrl.nameUpdated = function() {
+		window.localStorage.setItem("lunchbus.name", ctrl.name);
+	};
 });
