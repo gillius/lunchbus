@@ -12,6 +12,12 @@ websockets look like and its strengths/weaknesses.
 - [x] Chatbox
 - [ ] Choose a place randomly, restricting by preferences (tags) of those going
 
+Also totally unrelated to the lunchbus functionality, I have in there a log tail demo where a generator generates (at
+random intervals) about 10 messages a second and sends them in batches 4 times a second to the client, which displays
+them in a scrolling buffer, as a test case for high-throughput situations with websockets, and to make sure even under
+load the application still does well. The log generation is only triggered if you click the link to show the logs,
+otherwise there is no overhead from it.
+
 ## Running
 
     gradlew bootRun
