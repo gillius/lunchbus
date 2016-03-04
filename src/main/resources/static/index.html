@@ -74,6 +74,11 @@
 	</p>
 </div>
 
+<p><a href="#" ng-click="showLog = !showLog">Show me</a> a totally unrelated logging example!</p>
+<div ng-if="showLog">
+	<pre log-window></pre>
+</div>
+
 <!--<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/1.11.2/jquery.min.js"></script>-->
 <!--<script type="text/javascript" src="//cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>-->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
@@ -83,6 +88,7 @@
 <script type="text/javascript" src="ChatCtrl.js"></script>
 <script type="text/javascript" src="StatusCtrl.js"></script>
 <script type="text/javascript" src="iouCtrl.js"></script>
+<script type="text/javascript" src="logWindow.js"></script>
 <script type="text/javascript" src="mp.js"></script>
 <script type="text/javascript" src="PeopleCtrl.js"></script>
 <script type="text/javascript" src="PlacesCtrl.js"></script>

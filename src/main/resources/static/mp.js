@@ -26,6 +26,12 @@ angular.module('webapp').factory('mp', function($q, $rootScope, $timeout, host) 
 			})
 		},
 
+		getRawClient: function(callback) {
+			connected.then(function() {
+				callback(stompClient);
+			})
+		},
+
 		send: function(destination, message) {
 			if (typeof message === 'object')
 				message = JSON.stringify(message);

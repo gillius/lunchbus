@@ -2,6 +2,7 @@ package app
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.simp.SimpMessagingTemplate
+import org.springframework.messaging.support.MessageBuilder
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 
@@ -16,6 +17,6 @@ class DateSender {
 	@Scheduled(fixedRate = 1000L)
 	public void trigger() {
 		// sends the message to /topic/date
-		template.convertAndSend("/topic/date", "Date: " + new Date());
+		template.send("/topic/date", MessageBuilder.withPayload(("Date: " + new Date()).getBytes("UTF-8")).build());
 	}
 }
