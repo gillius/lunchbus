@@ -1,4 +1,4 @@
-package app
+package app.iou
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.handler.annotation.MessageMapping
@@ -9,22 +9,13 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class IOU {
-	private List<IOUEntry> entries = [
-	    new IOUEntry(creditor: 'Jason', debtor: 'Bob', amount: 5)
-	]
+	@Autowired IOUStore store
 
 	@Autowired
 	SimpMessagingTemplate mt
 
 	void increment(String creditor, String debtor, int amount) {
-		//TODO: thread-safe
-		def entry = entries.find { it.creditor == creditor && it.debtor == debtor }
-		if (!entry) {
-			entry = new IOUEntry(creditor: creditor, debtor: debtor)
-			entries.add(entry)
-		}
-		entry.amount += amount
-
+		store.increment(creditor, debtor, amount)
 		mt.convertAndSend("/topic/iou", entries)
 	}
 
@@ -37,6 +28,6 @@ class IOU {
 	@MessageMapping("/iou/getCurrent")
 	@SendToUser("/queue/iou")
 	List<IOUEntry> getEntries() {
-		entries
+		store.entries
 	}
 }

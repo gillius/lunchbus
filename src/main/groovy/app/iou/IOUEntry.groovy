@@ -1,4 +1,4 @@
-package app
+package app.iou
 
 import groovy.transform.Canonical
 

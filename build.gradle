@@ -26,6 +26,7 @@ configurations {
 
 dependencies {
 	compile("org.codehaus.groovy:groovy-all:2.4.5")
+	compile("redis.clients:jedis:2.8.0")
 	compile("org.springframework.boot:spring-boot-starter-web")
 	compile("org.springframework.boot:spring-boot-starter-websocket")
 	compile("org.springframework:spring-messaging")
