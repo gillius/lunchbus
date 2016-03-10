@@ -1,5 +1,5 @@
-angular.module('webapp').factory('mp', function($q, $rootScope, $timeout, host) {
-	var socket = new WebSocket("ws://" + host + ":8080/stomp");
+angular.module('webapp').factory('mp', function($q, $rootScope, $timeout, host, port) {
+	var socket = new WebSocket("ws://" + host + ":" + port + "/stomp");
 
 	var stompClient = Stomp.over(socket);
 	stompClient.debug = angular.noop();
