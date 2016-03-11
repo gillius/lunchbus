@@ -1,12 +1,8 @@
 package app.iou
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Primary
-import org.springframework.stereotype.Service
 import redis.clients.jedis.JedisPool
 
-@Primary
-@Service
 class RedisIOUStore implements IOUStore {
 	@Autowired
 	JedisPool pool

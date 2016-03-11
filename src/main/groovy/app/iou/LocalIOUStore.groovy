@@ -1,8 +1,5 @@
 package app.iou
 
-import org.springframework.stereotype.Service
-
-@Service
 class LocalIOUStore implements IOUStore {
 	final List<IOUEntry> entries = [
 			new IOUEntry(creditor: 'Jason', debtor: 'Bob', amount: 5)
