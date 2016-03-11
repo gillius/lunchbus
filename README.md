@@ -32,6 +32,17 @@ Another method:
 
 You can also add `--server.port=9000` to change the port used to whatever you want.
 
+If you'd like persistence, you can also use Redis. First, you need to install Redis at localhost and run it. It is
+highly recommended you don't expose the server to the Internet, so you should enable the "bind 127.0.0.1" option within
+the redis.conf file that you use. You can download Redis from http://redis.io/download (or for Windows users, at
+https://github.com/MSOpenTech/redis/releases). For example on Windows no installation is needed, just download the zip
+file, updated redis.windows.conf for the bind setting, then run `redis-server redis.windows.conf`.
+
+To run lunchbus in Redis mode, just add `--app.useRedis=true` to the command line.
+
+To run in IDE, just run the main class Application. For example in IntelliJ you open the build.gradle file as a project,
+right click Application and select run.
+
 ## License
 
 Copyright by Jason Winnebeck, 2016. Licensed under Apache 2.0 License.
