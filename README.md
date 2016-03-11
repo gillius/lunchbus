@@ -7,7 +7,7 @@ websockets look like and its strengths/weaknesses.
 ## Features
 
 - [x] IOU list (done)
-- [x] Places list, with tags
+- [x] Places list, with tags (TODO: ability to remove tags)
 - [x] People going
 - [x] Chatbox
 - [ ] Choose a place randomly, restricting by preferences (tags) of those going
@@ -20,6 +20,9 @@ load the application still does well. The log generation is only triggered if yo
 otherwise there is no overhead from it.
 
 ## Running
+
+You need Java 8 JDK installed on your system. While the project is built with Gradle, you do NOT need Gradle installed,
+as Gradle projects come with a wrapper script that downloads the necessary version of Gradle first if needed.
 
     gradlew bootRun
 
