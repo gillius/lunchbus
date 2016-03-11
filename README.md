@@ -11,7 +11,7 @@ websockets look like and its strengths/weaknesses.
 - [x] People going
 - [x] Chatbox
 - [ ] Choose a place randomly, restricting by preferences (tags) of those going
-- [ ] (In progress) ability to use Redis (at localhost) as a backing store
+- [x] Optionally use Redis (at localhost) as a backing store
 
 Also totally unrelated to the lunchbus functionality, I have in there a log tail demo where a generator generates (at
 random intervals) about 10 messages a second and sends them in batches 4 times a second to the client, which displays

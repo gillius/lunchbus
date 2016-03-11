@@ -37,6 +37,19 @@ class StoreConfig {
 		}
 	}
 
+	@Bean
+	TaggedItemStore<Place> placesStore() {
+		if (useRedis) {
+			return RedisTaggedItemStore.of(Place, "place:")
+		} else {
+			def ret = LocalTaggedItemStore.of(Place)
+
+			ret.addItem("Sakura Garden")
+
+			return ret
+		}
+	}
+
 	@Lazy @Bean
 	JedisPool jedisPool() {
 		new JedisPool(new JedisPoolConfig(), "localhost")

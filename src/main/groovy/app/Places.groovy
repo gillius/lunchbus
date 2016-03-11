@@ -1,7 +1,6 @@
 package app
 
-import groovy.transform.stc.ClosureParams
-import groovy.transform.stc.SimpleType
+import app.taggeditem.TaggedItemStore
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.simp.SimpMessagingTemplate
@@ -11,36 +10,25 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class Places {
-	private TreeSet<Place> places = new TreeSet<>([
-	    new Place(name: "Sakura Garden")
-	])
+	@Autowired
+	private TaggedItemStore<Place> placesStore
 
 	@Autowired
 	SimpMessagingTemplate mt
 
 	void addPlace(String name) {
-		places << new Place(name: name)
-		mt.convertAndSend("/topic/places", places)
+		placesStore.addItem(name)
+		mt.convertAndSend("/topic/places", placesStore.items)
 	}
 
 	void addTag(String name, String tag) {
-		update(name) {
-			it.tags << tag
-		}
+		placesStore.addTag(name, tag)
+		mt.convertAndSend("/topic/places", placesStore.items)
 	}
 
 	void setActive(String name, boolean active) {
-		update(name) {
-			it.active = active
-		}
-	}
-
-	private void update(String name, @ClosureParams(value = SimpleType, options = "app.Person") Closure<?> updater) {
-		def place = places.find { it.name == name }
-		if (place) {
-			updater(place)
-		}
-		mt.convertAndSend("/topic/places", places)
+		placesStore.setActive(name, active)
+		mt.convertAndSend("/topic/places", placesStore.items)
 	}
 
 	@MessageMapping("/places/add")
@@ -54,14 +42,14 @@ class Places {
 	}
 
 	@MessageMapping("/places/setActive")
-	void setPersonActiveByMessage(Map<String, Object> message) {
+	void setPlaceActiveByMessage(Map<String, Object> message) {
 		setActive(message.name as String, message.active as boolean)
 	}
 
 	@RequestMapping("/places/current")
 	@MessageMapping("/places/getCurrent")
 	@SendToUser("/queue/places")
-	Collection<Place> getPlaces() {
-		places
+	List<Place> getPlaces() {
+		placesStore.items
 	}
 }
