@@ -1,7 +1,6 @@
 package app
 
-import groovy.transform.stc.ClosureParams
-import groovy.transform.stc.SimpleType
+import app.taggeditem.TaggedItemStore
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.simp.SimpMessagingTemplate
@@ -11,42 +10,31 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class People {
-	private TreeSet<Person> people = new TreeSet<>([
-	    new Person(name: "Jason", tags: ["cool"])
-	])
+	@Autowired
+	private TaggedItemStore<Person> personStore
 
 	@Autowired
 	SimpMessagingTemplate mt
 
 	void addPerson(String name) {
-		people << new Person(name: name)
-		mt.convertAndSend("/topic/people", people)
+		personStore.addItem(name)
+		mt.convertAndSend("/topic/people", personStore.items)
 	}
 
 	void addTag(String name, String tag) {
-		update(name) {
-			it.tags << tag
-		}
+		personStore.addTag(name, tag)
+		mt.convertAndSend("/topic/people", personStore.items)
 	}
 
 	void setActive(String name, boolean active) {
-		update(name) {
-			it.active = active
-		}
-	}
-
-	private void update(String name, @ClosureParams(value = SimpleType, options = "app.Person") Closure<?> updater) {
-		def person = people.find { it.name == name }
-		if (person) {
-			updater(person)
-		}
-		mt.convertAndSend("/topic/people", people)
+		personStore.setActive(name, active)
+		mt.convertAndSend("/topic/people", personStore.items)
 	}
 
 	@MessageMapping("/people/add")
 	void addPersonByMessage(Map<String, Object> message) {
 		addPerson(message.name as String)
-	}
+}
 
 	@MessageMapping("/people/addTag")
 	void addPersonTagByMessage(Map<String, Object> message) {
@@ -61,7 +49,7 @@ class People {
 	@RequestMapping("/people/current")
 	@MessageMapping("/people/getCurrent")
 	@SendToUser("/queue/people")
-	Collection<Person> getPeople() {
-		people
+	List<Person> getPeople() {
+		personStore.items
 	}
 }
