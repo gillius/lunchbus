@@ -25,6 +25,11 @@ class Places extends AbstractTaggedItemService<Place> {
 		addTag(message.name as String, message.tag as String)
 	}
 
+	@MessageMapping("/places/removeTag")
+	void removePlaceTagByMessage(Map<String, Object> message) {
+		removeTag(message.name as String, message.tag as String)
+	}
+
 	@MessageMapping("/places/setActive")
 	void setPlaceActiveByMessage(Map<String, Object> message) {
 		setActive(message.name as String, message.active as boolean)

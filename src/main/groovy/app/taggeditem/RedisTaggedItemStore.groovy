@@ -39,6 +39,7 @@ class RedisTaggedItemStore<T extends TaggedItem> implements TaggedItemStore<T> {
 		}
 	}
 
+	@Override
 	void removeTag(String name, String tag) {
 		pool.resource.withCloseable { jedis ->
 			jedis.srem(keyPrefix + name, tag)

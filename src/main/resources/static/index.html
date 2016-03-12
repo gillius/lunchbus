@@ -26,7 +26,7 @@
 		<li ng-repeat="p in people.people">
 			<input type="checkbox" ng-model="p.active" ng-change="people.updateActive(p)">
 			{{p.name}}:
-			<tags route="'/app/people/addTag'" parent-name="p.name" tags="p.tags"></tags>
+			<tags route="'/app/people'" parent-name="p.name" tags="p.tags"></tags>
 		</li>
 	</ul>
 	<form name="addPerson" ng-submit="people.addPerson()">
@@ -41,7 +41,7 @@
 		<li ng-repeat="p in places.places">
 			<input type="checkbox" ng-model="p.active" ng-change="places.updateActive(p)">
 			{{p.name}}:
-			<tags route="'/app/places/addTag'" parent-name="p.name" tags="p.tags"></tags>
+			<tags route="'/app/places'" parent-name="p.name" tags="p.tags"></tags>
 		</li>
 	</ul>
 	<form name="addPlace" ng-submit="places.addPlace()">

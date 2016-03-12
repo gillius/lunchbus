@@ -28,6 +28,11 @@ abstract class AbstractTaggedItemService<T extends TaggedItem> {
 		mt.convertAndSend(topic, itemStore.items)
 	}
 
+	void removeTag(String name, String tag) {
+		itemStore.removeTag(name, tag)
+		mt.convertAndSend(topic, itemStore.items)
+	}
+
 	void setActive(String name, boolean active) {
 		itemStore.setActive(name, active)
 		mt.convertAndSend(topic, itemStore.items)

@@ -25,6 +25,11 @@ class People extends AbstractTaggedItemService<Person> {
 		addTag(message.name as String, message.tag as String)
 	}
 
+	@MessageMapping("/people/removeTag")
+	void removePersonTagByMessage(Map<String, Object> message) {
+		removeTag(message.name as String, message.tag as String)
+	}
+
 	@MessageMapping("/people/setActive")
 	void setPersonActiveByMessage(Map<String, Object> message) {
 		setActive(message.name as String, message.active as boolean)

@@ -30,6 +30,13 @@ class LocalTaggedItemStore<T extends TaggedItem> implements TaggedItemStore<T> {
 	}
 
 	@Override
+	void removeTag(String name, String tag) {
+		update(name) {
+			it.tags.remove(tag)
+		}
+	}
+
+	@Override
 	void setActive(String name, boolean active) {
 		update(name) {
 			it.active = active
