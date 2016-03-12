@@ -1,5 +1,8 @@
 package app
 
+import app.chat.ChatStore
+import app.chat.LocalChatStore
+import app.chat.RedisChatStore
 import app.iou.IOUStore
 import app.iou.LocalIOUStore
 import app.iou.RedisIOUStore
@@ -48,6 +51,11 @@ class StoreConfig {
 
 			return ret
 		}
+	}
+
+	@Bean
+	ChatStore chatStore() {
+		useRedis ? new RedisChatStore() : new LocalChatStore()
 	}
 
 	@Lazy @Bean
