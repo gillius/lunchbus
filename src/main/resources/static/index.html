@@ -50,6 +50,14 @@
 	</form>
 </div>
 
+<div ng-controller="SelectorCtrl as selector">
+	<p>The lunchbus is going to: {{selector.selectedPlace}}</p>
+	<p>
+		<button ng-click="selector.selectPlace()">Select</button>
+		<button ng-click="selector.clearPlace()">Clear</button>
+	</p>
+</div>
+
 <h3>Chat</h3>
 <div ng-controller="ChatCtrl as chat">
 	<table>
@@ -92,6 +100,7 @@
 <script type="text/javascript" src="mp.js"></script>
 <script type="text/javascript" src="PeopleCtrl.js"></script>
 <script type="text/javascript" src="PlacesCtrl.js"></script>
+<script type="text/javascript" src="SelectorCtrl.js"></script>
 <script type="text/javascript" src="TagsComponent.js"></script>
 
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
