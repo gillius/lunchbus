@@ -46,6 +46,19 @@ To run lunchbus in Redis mode, just add `--app.useRedis=true` to the command lin
 To run in IDE, just run the main class Application. For example in IntelliJ you open the build.gradle file as a project,
 right click Application and select run.
 
+## Observations
+
+- Websocket interactions are harder to debug than HTTP (REST API) calls, mostly due to fact that browser network panels
+  are so well developed there.
+- Websocket-based API doesn't preclude possibility of also having and using a REST API.
+- Websocket-based API isn't any harder to develop than REST API, if anything it's a touch easier, and you get instant
+  updates everywhere for free.
+- Spring Boot is amazing for rapid prototyping and looks like it can scale well to a full-sized system.
+- I still need to test how well this works over the Internet.
+- Redis is really fast, it's fast enough that I didn't feel like I needed a local version of data. As a side-effect,
+  the system almost supports clustering out-of-the-box (I would just need to connect Spring boot to the Redis pubsub
+  system to distribute messages across the cluster).
+
 ## License
 
 Copyright by Jason Winnebeck, 2016. Licensed under Apache 2.0 License.
