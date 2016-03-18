@@ -1,76 +1,86 @@
 <!DOCTYPE html>
 <html ng-app="webapp">
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<title>Lunchbus</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	      integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+	      integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body ng-cloak>
 <h3>IOU</h3>
 <div ng-controller="IouCtrl as iou">
-	<ul>
+	<ul class="list-unstyled">
 		<li ng-repeat="entry in iou.entries">
 			{{entry.debtor}} owes {{entry.creditor}}: {{entry.amount}}
-			<button ng-click="iou.more(entry)">+</button>
-			<button ng-click="iou.less(entry)">-</button>
+			<button class="btn btn-default" ng-click="iou.more(entry)">+</button>
+			<button class="btn btn-default" ng-click="iou.less(entry)">-</button>
 		</li>
 	</ul>
-	<form name="iouForm" ng-submit="iou.addEntry()">
-		<input type="text" ng-model="iou.debtor" ng-required="true">
-		<label>owes: <input type="text" ng-model="iou.creditor" ng-required="true"></label>
-		<button type="submit" ng-disabled="!iouForm.$valid">Add</button>
+	<form class="form-inline" name="iouForm" ng-submit="iou.addEntry()">
+		<input class="form-control" type="text" ng-model="iou.debtor" ng-required="true">
+		<label>owes: <input class="form-control" type="text" ng-model="iou.creditor" ng-required="true"></label>
+		<button class="btn btn-primary" type="submit" ng-disabled="!iouForm.$valid">Add</button>
 	</form>
 </div>
 
 <h3>People</h3>
 <div ng-controller="PeopleCtrl as people">
-	<ul>
+	<ul class="list-unstyled">
 		<li ng-repeat="p in people.people">
 			<input type="checkbox" ng-model="p.active" ng-change="people.updateActive(p)">
 			{{p.name}}:
 			<tags route="'/app/people'" parent-name="p.name" tags="p.tags"></tags>
 		</li>
 	</ul>
-	<form name="addPerson" ng-submit="people.addPerson()">
-		<label>Add person: <input type="text" ng-model="people.name" ng-required="true"></label>
-		<button type="submit" ng-disabled="!addPerson.$valid">Add</button>
+	<form class="form-inline" name="addPerson" ng-submit="people.addPerson()">
+		<label>Add person: <input class="form-control" type="text" ng-model="people.name" ng-required="true"></label>
+		<button class="btn btn-primary" type="submit" ng-disabled="!addPerson.$valid">Add</button>
 	</form>
 </div>
 
 <h3>Places</h3>
 <div ng-controller="PlacesCtrl as places">
-	<ul>
+	<ul class="list-unstyled">
 		<li ng-repeat="p in places.places">
 			<input type="checkbox" ng-model="p.active" ng-change="places.updateActive(p)">
 			{{p.name}}:
 			<tags route="'/app/places'" parent-name="p.name" tags="p.tags"></tags>
 		</li>
 	</ul>
-	<form name="addPlace" ng-submit="places.addPlace()">
-		<label>Add place: <input type="text" ng-model="places.name" ng-required="true"></label>
-		<button type="submit" ng-disabled="!addPlace.$valid">Add</button>
+	<form class="form-inline" name="addPlace" ng-submit="places.addPlace()">
+		<label>Add place: <input class="form-control" type="text" ng-model="places.name" ng-required="true"></label>
+		<button class="btn btn-primary" type="submit" ng-disabled="!addPlace.$valid">Add</button>
 	</form>
 </div>
 
 <div ng-controller="SelectorCtrl as selector">
 	<p>The lunchbus is going to: {{selector.selectedPlace}}</p>
 	<p>
-		<button ng-click="selector.selectPlace()">Select</button>
-		<button ng-click="selector.clearPlace()">Clear</button>
+		<button class="btn btn-primary" ng-click="selector.selectPlace()">Select</button>
+		<button class="btn btn-default" ng-click="selector.clearPlace()">Clear</button>
 	</p>
 </div>
 
 <h3>Chat</h3>
 <div ng-controller="ChatCtrl as chat">
-	<table>
+	<table class="table table-condensed chatTable">
 		<tr ng-repeat="m in chat.messages">
 			<td>{{m.date | date:'shortTime'}}</td>
 			<td>{{m.name}}</td>
 			<td>{{m.message}}</td>
 		</tr>
 	</table>
-	<form name="addMessage" ng-submit="chat.addMessage()">
-		<label>Name: <input type="text" ng-model="chat.name" ng-change="chat.nameUpdated()" ng-required="true"></label>
-		<label>Message: <input type="text" ng-model="chat.message" ng-required="true"></label>
-		<button type="submit" ng-disabled="!addMessage.$valid">Speak!</button>
+	<form class="form-inline" name="addMessage" ng-submit="chat.addMessage()">
+		<label>Name: <input class="form-inline" type="text" ng-model="chat.name" ng-change="chat.nameUpdated()" ng-required="true"></label>
+		<label>Message: <input class="form-inline" type="text" ng-model="chat.message" ng-required="true"></label>
+		<button class="btn btn-primary" type="submit" ng-disabled="!addMessage.$valid">Speak!</button>
 	</form>
 </div>
 
