@@ -1,5 +1,5 @@
 # Lunchbus
-Decide where the lunchbus goes. Play project to learn Spring Boot + websockets + AngularJS + Groovy + Redis.
+Decide where the lunchbus goes. Play project to learn Spring Boot + websockets + AngularJS 1.5 + Groovy + Redis.
 
 My goal is to learn Spring Boot and websockets primarily, and also to see what does an application relying solely on
 websockets look like and its strengths/weaknesses.
@@ -39,7 +39,7 @@ If you'd like persistence, you can also use Redis. First, you need to install Re
 highly recommended you don't expose the server to the Internet, so you should enable the "bind 127.0.0.1" option within
 the redis.conf file that you use. You can download Redis from http://redis.io/download (or for Windows users, at
 https://github.com/MSOpenTech/redis/releases). For example on Windows no installation is needed, just download the zip
-file, updated redis.windows.conf for the bind setting, then run `redis-server redis.windows.conf`.
+file, update redis.windows.conf for the bind setting, then run `redis-server redis.windows.conf`.
 
 To run lunchbus in Redis mode, just add `--app.useRedis=true` to the command line.
 
