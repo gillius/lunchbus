@@ -1,5 +1,8 @@
-angular.module('webapp').factory('mp', function($q, $rootScope, $timeout, host, port) {
-	var socket = new WebSocket("ws://" + host + ":" + port + "/stomp");
+angular.module('webapp').factory('mp', function($q, $rootScope, $timeout, protocol, host, port) {
+	var wsProtocol = 'ws://';
+	if (protocol === 'https:')
+		wsProtocol = 'wss://';
+	var socket = new WebSocket(wsProtocol + host + ":" + port + "/stomp");
 
 	var stompClient = Stomp.over(socket);
 	stompClient.debug = angular.noop();
