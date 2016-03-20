@@ -2,7 +2,7 @@ angular.module('webapp').factory('mp', function($q, $rootScope, $timeout, protoc
 	var wsProtocol = 'ws://';
 	if (protocol === 'https:')
 		wsProtocol = 'wss://';
-	var socket = new WebSocket(wsProtocol + host + ":" + port + "/stomp");
+	var socket = new WebSocket(wsProtocol + host + port + "/stomp");
 
 	var stompClient = Stomp.over(socket);
 	stompClient.debug = angular.noop();
