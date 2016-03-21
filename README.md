@@ -41,10 +41,14 @@ the redis.conf file that you use. You can download Redis from http://redis.io/do
 https://github.com/MSOpenTech/redis/releases). For example on Windows no installation is needed, just download the zip
 file, update redis.windows.conf for the bind setting, then run `redis-server redis.windows.conf`.
 
-To run lunchbus in Redis mode, just add `--app.useRedis=true` to the command line.
+To run lunchbus in Redis mode, just add `--app.useRedis=true` to the command line. By default it connects to localhost
+on the default port 6379. If you want to change this, specify the Redis URL: `--app.redisUrl=redis://localhost:6379`.
 
 To run in IDE, just run the main class Application. For example in IntelliJ you open the build.gradle file as a project,
 right click Application and select run.
+
+The repository contains the Procfile and Gradle targets needed to run the application on Heroku. The free Heroku dyno
+and Heroku Redis addon is sufficient to run the application.
 
 ## Observations
 

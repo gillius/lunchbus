@@ -20,6 +20,7 @@ import redis.clients.jedis.JedisPoolConfig
 @ConfigurationProperties(prefix = "app")
 class StoreConfig {
 	boolean useRedis
+	String redisUrl = "redis://localhost:6379"
 
 	@Bean
 	IOUStore iouStore() {
@@ -60,6 +61,6 @@ class StoreConfig {
 
 	@Lazy @Bean
 	JedisPool jedisPool() {
-		new JedisPool(new JedisPoolConfig(), "localhost")
+		new JedisPool(new JedisPoolConfig(), new URI(redisUrl))
 	}
 }
